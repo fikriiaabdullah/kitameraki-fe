@@ -1,73 +1,99 @@
-# React + TypeScript + Vite
+# Kitameraki Task Manager — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Task Management Application built with React v18, TypeScript, and Fluent UI.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React v18
+- TypeScript
+- Fluent UI v9 (`@fluentui/react-components`)
+- React Router v6
+- Axios
+- dnd-kit (drag and drop)
+- Vite
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js v18+
+- npm v9+
+- Backend running at `http://localhost:7071`
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Clone the repository
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <your-repo-url>
+cd Kitameraki-fe
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Configure environment
+
+Create a `.env` file at the project root:
+
+```env
+VITE_ORGANIZATION_ID=default
+```
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+> **Note:** Make sure the backend is running at `http://localhost:7071` before starting the frontend. See the backend README for setup instructions.
+
+## Features
+
+### Task List Page (`/tasks`)
+- View all tasks in a table
+- Search tasks by title or description
+- Filter tasks by status and priority
+- Add new tasks via a dialog form
+- Edit tasks inline
+- Delete tasks
+- Change task status directly from the table
+- Pagination (10 tasks per page)
+
+### Form Settings Page (`/settings`)
+- View and reorder default form fields via drag and drop
+- Add custom fields (Text, Date, Date and Time, Email)
+- Configure field column layout (1 or 2 columns)
+- Rename custom fields
+- Delete custom fields
+- Save settings — applies to all task forms
+
+## Project Structure
+
+```
+src/
+├── api/
+│   └── taskApi.ts         # API calls to backend
+├── components/
+│   ├── Navbar.tsx         # Top navigation bar
+│   ├── TaskDialog.tsx     # Add/Edit task dialog
+│   └── TaskTable.tsx      # Task list table
+├── pages/
+│   ├── TaskListPage.tsx   # Main task list page
+│   └── SettingsPage.tsx   # Form settings page
+├── types/
+│   └── index.ts           # TypeScript types
+├── App.tsx
+└── main.tsx
+```
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+Output will be in the `dist/` folder.
